@@ -23,12 +23,16 @@ module SecureHeaders
       def validate_config!(config)
         return if config.nil? || config == OPT_OUT
 
-        raise ReportToConfigError.new("Value must be given as a hash") unless config.is_a?(Hash)
+        raise ReportToConfigError.new("Value must be given as a array") unless config.is_a?(Array)
 
-        config_keys = config.keys
-        raise ReportToConfigError.new("Missing group value") unless config_keys.include?(:group)
-        raise ReportToConfigError.new("Missing max_age value") unless config_keys.include?(:max_age)
-        raise ReportToConfigError.new("Missing endpoints value") unless config_keys.include?(:endpoints)
+        config.each do |h|
+          raise ReportToConfigError.new("Each value in the array must be a hash") unless config.is_a?(Hash)
+
+          keys = config.keys
+          raise ReportToConfigError.new("Missing group value") unless keys.include?(:group)
+          raise ReportToConfigError.new("Missing max_age value") unless keys.include?(:max_age)
+          raise ReportToConfigError.new("Missing endpoints value") unless keys.include?(:endpoints)
+        end
       end
     end
   end

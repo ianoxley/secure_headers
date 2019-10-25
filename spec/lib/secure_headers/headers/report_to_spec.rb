@@ -15,10 +15,30 @@ module SecureHeaders
         )
       end
 
+      # specify do
+      #   hash_1 = { group: "csp-endpoint", max_age: 10886400, endpoints: [{url: "http://foo.com/bar"}] }
+      #   hash_2 = { group: "report-endpoint", max_age: 10886400, endpoints: [{url: "http://bar.com/foo"}] }
+      #   json = <<~JSON
+      #     {\"group\":\"csp-endpoint\",\"max-age\":10886400,\"endpoints\":[{\"url\":\"http://foo.com/bar\"}]},
+      #     {\"group\":\"report-endpoint\",\"max-age\":10886400,\"endpoints\":[{\"url\":\"http://bar.com/foo\"}]}
+      #   JSON
+      #   expect(
+      #     ReportTo.make_header(hash_1, hash_2)
+      #   ).to eq(
+      #     [ReportTo::HEADER_NAME, json]
+      #   )
+      # end
+
       context "invalid values" do
-        it "raises an error when the value is not a hash" do
+        it "raises an error when the value is not an array" do
           expect do
             ReportTo.validate_config!("foobar")
+          end.to raise_error(ReportToConfigError)
+        end
+
+        it "raises an error when the value array does not contain hashes" do
+          expect do
+            ReportTo.validate_config!(["foobar"])
           end.to raise_error(ReportToConfigError)
         end
 
