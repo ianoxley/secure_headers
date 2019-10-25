@@ -111,6 +111,7 @@ module SecureHeaders
       x_download_options: XDownloadOptions,
       x_permitted_cross_domain_policies: XPermittedCrossDomainPolicies,
       referrer_policy: ReferrerPolicy,
+      report_to: ReportTo,
       clear_site_data: ClearSiteData,
       expect_certificate_transparency: ExpectCertificateTransparency,
       csp: ContentSecurityPolicy,
