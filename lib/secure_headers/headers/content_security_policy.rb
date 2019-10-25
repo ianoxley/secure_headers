@@ -192,6 +192,7 @@ module SecureHeaders
       [
         DEFAULT_SRC,
         BODY_DIRECTIVES,
+        REPORT_TO,
         REPORT_URI,
       ].flatten
     end

@@ -141,6 +141,11 @@ module SecureHeaders
         expect(csp.value).to eq("default-src 'self'; navigate-to foo.com")
       end
 
+      it "includes report-to" do
+        csp = ContentSecurityPolicy.new(default_src: %w('self'), report_to: %w(report-endpoint))
+        expect(csp.value).to eq("default-src 'self'; report-to report-endpoint")
+      end
+
       it "supports strict-dynamic" do
         csp = ContentSecurityPolicy.new({default_src: %w('self'), script_src: [ContentSecurityPolicy::STRICT_DYNAMIC], script_nonce: 123456})
         expect(csp.value).to eq("default-src 'self'; script-src 'strict-dynamic' 'nonce-123456' 'unsafe-inline'")

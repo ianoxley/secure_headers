@@ -33,6 +33,7 @@ module SecureHeaders
       @prefetch_src = nil
       @preserve_schemes = nil
       @report_only = nil
+      @report_to = nil
       @report_uri = nil
       @require_sri_for = nil
       @sandbox = nil

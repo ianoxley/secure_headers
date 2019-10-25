@@ -38,6 +38,7 @@ module SecureHeaders
     SANDBOX = :sandbox
     SCRIPT_SRC = :script_src
     STYLE_SRC = :style_src
+    REPORT_TO = :report_to
     REPORT_URI = :report_uri
 
     DIRECTIVES_1_0 = [
@@ -86,6 +87,7 @@ module SecureHeaders
       NAVIGATE_TO,
       PREFETCH_SRC,
       REQUIRE_SRI_FOR,
+      REPORT_TO,
       WORKER_SRC,
       UPGRADE_INSECURE_REQUESTS
     ].flatten.freeze
@@ -94,7 +96,7 @@ module SecureHeaders
 
     # Think of default-src and report-uri as the beginning and end respectively,
     # everything else is in between.
-    BODY_DIRECTIVES = ALL_DIRECTIVES - [DEFAULT_SRC, REPORT_URI]
+    BODY_DIRECTIVES = ALL_DIRECTIVES - [DEFAULT_SRC, REPORT_TO, REPORT_URI]
 
     DIRECTIVE_VALUE_TYPES = {
       BASE_URI                  => :source_list,
@@ -113,6 +115,7 @@ module SecureHeaders
       OBJECT_SRC                => :source_list,
       PLUGIN_TYPES              => :media_type_list,
       REQUIRE_SRI_FOR           => :require_sri_for_list,
+      REPORT_TO                 => :source_list,
       REPORT_URI                => :source_list,
       PREFETCH_SRC              => :source_list,
       SANDBOX                   => :sandbox_list,
@@ -135,6 +138,7 @@ module SecureHeaders
       FORM_ACTION,
       FRAME_ANCESTORS,
       NAVIGATE_TO,
+      REPORT_TO,
       REPORT_URI,
     ]
 
